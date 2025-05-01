@@ -9,24 +9,10 @@ exports.up = function (knex) {
       table.string('name').notNullable();
       table.date('DOB').notNullable();
       table.string('Bio').notNullable();
-      table.image('profile_img');
+      // table.blob('profile_img');
       table.string('email').notNullable().unique();
       table.string('username').notNullable().unique();
       table.string('password').notNullable();
-    })
-    .createTable('post', function (table) {
-      table.increments('id').primary();
-      table.string('title').notNullable();
-      table.string('description').notNullable();
-      table.image('img');
-      table.integer('votes').notNullable();
-      table.boolean('isWinner');
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.integer('user_id').unsigned().notNullable();
-      table.integer('challenge_id').unsigned().notNullable();
-      // Foreign keys
-      table.foreign('user_id').references('id').inTable('users');
-      table.foreign('challenge_id').references('id').inTable('challenges');
     })
     .createTable('challenges', function (table) {
       table.increments('id').primary();
@@ -39,6 +25,20 @@ exports.up = function (knex) {
       table.integer('user_id').unsigned().notNullable();
       // Foreign keys
       table.foreign('user_id').references('id').inTable('users');
+    })
+    .createTable('post', function (table) {
+      table.increments('id').primary();
+      table.string('title').notNullable();
+      table.string('description').notNullable();
+      // table.blob('img');
+      table.integer('votes').notNullable();
+      table.boolean('isWinner');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.integer('user_id').unsigned().notNullable();
+      table.integer('challenge_id').unsigned().notNullable();
+      // Foreign keys
+      table.foreign('user_id').references('id').inTable('users');
+      table.foreign('challenge_id').references('id').inTable('challenges');
     })
     .createTable('comments', function (table) {
       table.increments('id').primary();
