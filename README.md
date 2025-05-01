@@ -1,2 +1,2 @@
-# Hobbyist
-Creating a place for people to pick up hobbies and budget accordingly.
+# Mindful Matter
+Creating a place for people to participate in challenges and discuss their experiences.
