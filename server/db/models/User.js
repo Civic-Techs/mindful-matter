@@ -20,7 +20,7 @@ class User {
         return authUtils.isValidPassword(password, this.#passwordHash);
     }
 
-    static async create(name, dob, bio = '', profile_img_src = '', email, username, password) {
+    static async create({ name, dob, bio = '', profile_img_src = '', email, username, password }) {
         const passwordHash = await authUtils.hashPassword(password);
         const profile_img = profile_img_src || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQLTeg_bOJsXMkmRDM-YKCtqy91t0Way8KP99OFb53AA&s';
 
@@ -40,8 +40,7 @@ class User {
             passwordHash
         ]);
 
-        const user = rows[0];
-        return new User(user);
+        return new User(rows[0]);
     }
 
     static async list() {
@@ -64,21 +63,48 @@ class User {
         return user ? new User(user) : null;
     }
 
-    static async editUser(id, name, bio, profile_img, email, username, password) {
-        const fields = [name, bio, profile_img, email, username];
-        if (password) fields.push(await authUtils.hashPassword(password));
+    static async editUser({ id, name, bio, profile_img, email, username, password }) {
+        const fields = [];
+        const updates = [];
+
+        if (name) {
+            updates.push('name = ?');
+            fields.push(name);
+        }
+        if (bio) {
+            updates.push('bio = ?');
+            fields.push(bio);
+        }
+        if (profile_img) {
+            updates.push('profile_img = ?');
+            fields.push(profile_img);
+        }
+        if (email) {
+            updates.push('email = ?');
+            fields.push(email);
+        }
+        if (username) {
+            updates.push('username = ?');
+            fields.push(username);
+        }
+        if (password) {
+            updates.push('password_hash = ?');
+            fields.push(await authUtils.hashPassword(password));
+        }
+
+        if (updates.length === 0) return null;
+
         fields.push(id);
 
         const query = `
-            UPDATE users
-            SET name = ?, bio = ?, profile_img = ?, email = ?, username = ? ${ password ? ', password = ?' : ''}
-            WHERE id = ?
-            RETURNING *
-        `;
+        UPDATE users
+        SET ${updates.join(', ')}
+        WHERE id = ?
+        RETURNING *;
+    `;
 
         const { rows } = await knex.raw(query, fields);
-        const updatedUser = rows[0];
-        return updatedUser ? new User(updatedUser) : null;
+        return rows[0] ? new User(rows[0]) : null;
     }
 
     static async deleteAll() {
