@@ -8,7 +8,7 @@ class Category {
     static async create({ title }) {
         const query = `
             INSERT INTO categories (title)
-            VALUES ( ? )
+            VALUES (?)
             RETURNING *
         `;
 

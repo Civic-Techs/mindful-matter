@@ -113,6 +113,6 @@ class Post {
     }
 
     static async deleteAll() {
-        return knex('posts').del();
+        return await knex('posts').del();
     }
 }

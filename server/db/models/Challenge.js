@@ -96,6 +96,6 @@ class Challenge {
     }
 
     static async deleteAll() {
-        return knex('challenges').del();
+        return await knex('challenges').del();
     }
 }

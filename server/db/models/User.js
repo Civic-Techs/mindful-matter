@@ -121,6 +121,6 @@ class User {
     }
 
     static async deleteAll() {
-        return knex('users').del();
+        return await knex('users').del();
     }
 }
