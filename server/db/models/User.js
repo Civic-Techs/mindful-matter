@@ -69,27 +69,27 @@ class User {
         const fields = [];
         const updates = [];
 
-        if (name) {
+        if (user?.trim()) {
             updates.push('name = ?');
             fields.push(name);
         }
-        if (bio) {
+        if (bio?.trim()) {
             updates.push('bio = ?');
             fields.push(bio);
         }
-        if (profile_img) {
+        if (profile_img?.trim()) {
             updates.push('profile_img = ?');
             fields.push(profile_img);
         }
-        if (email) {
+        if (email?.trim()) {
             updates.push('email = ?');
             fields.push(email);
         }
-        if (username) {
+        if (username?.trim()) {
             updates.push('username = ?');
             fields.push(username);
         }
-        if (password) {
+        if (password?.trim()) {
             updates.push('password_hash = ?');
             fields.push(await authUtils.hashPassword(password));
         }
@@ -107,6 +107,17 @@ class User {
 
         const { rows } = await knex.raw(query, fields);
         return rows[0] ? new User(rows[0]) : null;
+    }
+
+    static async delete(id) {
+        const query = `
+            DELETE FROM users
+            WHERE id = ?
+            RETURNING *;
+        `;
+
+        const { rows } = await knex.raw(query, [id]);
+        return rows[0] ? new Post(rows[0]) : null;
     }
 
     static async deleteAll() {

@@ -55,15 +55,15 @@ class Challenge {
         const fields = [];
         const updates = [];
 
-        if (title) {
+        if (title?.trim()) {
             updates.push('title = ?');
             fields.push(title);
         }
-        if (description) {
+        if (description?.trim()) {
             updates.push('description = ?');
             fields.push(description);
         }
-        if (img) {
+        if (img?.trim()) {
             updates.push('img = ?');
             fields.push(img);
         }

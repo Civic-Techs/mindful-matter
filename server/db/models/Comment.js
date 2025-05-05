@@ -52,7 +52,7 @@ class Comment {
     }
 
     static async editComment(content, id) {
-        if (content === null || id === null) return null;
+        if (!content?.trim() || id === null) return null;
 
         const query = `
             UPDATE comments
