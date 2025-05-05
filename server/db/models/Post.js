@@ -68,6 +68,8 @@ class Post {
     }
 
     static async editPost(title, description, img, id) {
+        if (id === undefined) return null;
+
         const fields = [];
         const updates = [];
 

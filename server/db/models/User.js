@@ -64,6 +64,8 @@ class User {
     }
 
     static async editUser({ id, name, bio, profile_img, email, username, password }) {
+        if (id === undefined) return null;
+
         const fields = [];
         const updates = [];
 
