@@ -47,7 +47,7 @@ class CategoryChallenges {
         const query = `
             DELETE FROM category_challenges
             WHERE category_id = ? AND challenge_id = ?
-            RETURNING *;
+            RETURNING *
         `;
         const { rows } = await knex.raw(query, [category_id, challenge_id]);
         return rows[0] ? new CategoryChallenges(rows[0]) : null;
