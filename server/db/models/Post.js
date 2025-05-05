@@ -1,5 +1,4 @@
 const knex = require('../knex');
-const authUtils = require('../../utils/auth-utils');
 
 class Post {
     constructor({ title, description, img, is_winner, created_at, user_id, challenge_id }) {
@@ -100,6 +99,17 @@ class Post {
         const { rows } = await knex.raw(query, fields);
         const updatedPost = rows[0];
         return updatedPost ? new Post(updatedPost) : null;
+    }
+
+    static async delete(id) {
+        const query = `
+            DELETE FROM posts
+            WHERE id = ?
+            RETURNING *;
+        `;
+
+        const { rows } = await knex.raw(query, [id]);
+        return rows[0] ? new Post(rows[0]) : null;
     }
 
     static async deleteAll() {

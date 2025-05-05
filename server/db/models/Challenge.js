@@ -1,5 +1,4 @@
 const knex = require('../knex');
-const authUtils = require('../../utils/auth-utils');
 
 class Challenge {
     constructor({ title, description, img, is_contest, created_at, end_time, user_id }) {
@@ -92,7 +91,8 @@ class Challenge {
             RETURNING *;
         `;
 
-        return knex.raw(query, [id]);
+        const { rows } = await knex.raw(query, [id]);
+        return rows[0] ? new Challenge(rows[0]) : null;
     }
 
     static async deleteAll() {
