@@ -1,3 +1,7 @@
+// export default function UserProfile() {
+//     return <h1>User Profile Page</h1>;
+//   }
+
 import { Link } from "react-router-dom";
 import { users, joinedChallenges, challenges } from "../adapters/mockData";
 
