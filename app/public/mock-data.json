@@ -1,0 +1,90 @@
+{
+  "user": [
+    {
+      "userId": 1,
+      "name": "Jane Doe",
+      "dob": "2000-07-17",
+      "user_name": "anomJane",
+      "bio": "Creative thinker and late-night coder. Coffee lover with a passion for minimal design.",
+      "password": "string",
+      "created_at": "2025-05-06T10:15:00.000Z"
+    },
+    {
+      "userId": 2,
+      "name": "Tyron O.",
+      "dob": "2004-05-20",
+      "user_name": "tyroCreator",
+      "bio": "Aspiring full-stack dev building one project at a time. Big fan of anime and productivity hacks.",
+      "password": "string",
+      "created_at": "2025-05-06T10:16:00.000Z"
+    },
+    {
+      "userId": 3,
+      "name": "Catalina D.",
+      "dob": "2003-11-10",
+      "user_name": "catCurates",
+      "bio": "Digital curator and aesthetics enthusiast. I organize chaos into clean, clickable interfaces.",
+      "password": "string",
+      "created_at": "2025-05-06T10:17:00.000Z"
+    }
+  ],
+  "challenges": [
+    {
+      "challengeId": 1,
+      "title": "Learn Guitar",
+      "description": "Practice guitar for 30 minutes daily.",
+      "contest": false,
+      "winner": false,
+      "timestamp": "2025-05-01 10:00 pm",
+      "end_time": "2025-05-31 10:59 am",
+      "createdBy": 1
+    },
+    {
+      "challengeId": 2,
+      "title": "Read a Book",
+      "description": "Finish any book of your choice within this month.",
+      "contest": true,
+      "winner": false,
+      "timestamp": "2025-05-01 12:00 pm",
+      "end_time": "2025-05-30 7:00 pm",
+      "createdBy": 2
+    },
+    {
+      "challengeId": 3,
+      "title": "DIY Churros",
+      "description": "Make churros from scratch and share a picture!",
+      "contest": true,
+      "winner": true,
+      "timestamp": "2025-04-15 09:30 am",
+      "end_time": "2025-04-20 11:00 pm",
+      "createdBy": 3
+    },
+    {
+      "challengeId": 4,
+      "title": "Daily Sketch",
+      "description": "Draw something every day, even if it’s just for 5 minutes.",
+      "contest": false,
+      "winner": false,
+      "timestamp": "2025-05-05 08:00 am",
+      "end_time": "2025-05-31 08:00 pm",
+      "createdBy": 3
+    },
+    {
+      "challengeId": 5,
+      "title": "Walk 10K Steps",
+      "description": "Track and complete 10,000 steps a day for a week.",
+      "contest": true,
+      "winner": false,
+      "timestamp": "2025-05-07 06:00 am",
+      "end_time": "2025-05-14 09:00 pm",
+      "createdBy": 2
+    }
+  ],
+  "joined-challenges": [
+    { "userId": 1, "challengeId": 2 },
+    { "userId": 1, "challengeId": 3 },
+    { "userId": 2, "challengeId": 1 },
+    { "userId": 3, "challengeId": 1 },
+    { "userId": 3, "challengeId": 2 }
+  ]
+}
