@@ -63,7 +63,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-exports.loginUser = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     // Ensure the request body exists
     if (!req.body) {
