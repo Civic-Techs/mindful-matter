@@ -7,5 +7,3 @@ authRouter.post('/register', authControllers.registerUser);
 authRouter.get('/me', authControllers.showMe);
 authRouter.post('/login', authControllers.login);
 authRouter.delete('/logout', authControllers.logout);
-
-module.exports(authRouter);
