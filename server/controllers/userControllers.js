@@ -19,7 +19,7 @@ exports.getUserById = async (req, res) => {
       created_at: user.created_at,
     });
   } catch (error) {
-    console.error('Error fetching user by ID', error);
+    console.error('Error fetching user by ID: ', error);
     res.status(500).send({ message: 'An error occurred while fetching user.' });
   }
 };
@@ -62,7 +62,7 @@ exports.deleteUser = async (req, res) => {
     }
     res.status(200).send({ message: 'User deleted successfully.' });
   } catch (error) {
-    console.error('Error deleting user', error);
+    console.error('Error deleting user: ', error);
     res.status(500).send({ message: 'An error occurred while deleting user.' });
   }
 };
