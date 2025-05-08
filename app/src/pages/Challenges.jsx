@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchData } from "../adapters/handleFetch";
+import { allChallenges } from "../adapters/challengesFetch";
 
 function ChallengesPage() {
   const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
     const getChallenges = async () => {
-      const [data, error] = await fetchData("/mock-data.json");
+      const [data, error] = await allChallenges();
 
       if (error) {
         console.error("error loading challenges", error);
         return;
       }
-      setChallenges(data.challenges);
+      setChallenges(data);
     };
     getChallenges();
   }, []);
@@ -23,7 +23,7 @@ function ChallengesPage() {
       <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
         {challenges.map((challenge) => (
           <li
-            key={challenge.challengeId}
+            key={challenge.id}
             style={{
               marginBottom: "10px",
               border: "4px solid black",
@@ -32,9 +32,7 @@ function ChallengesPage() {
               padding: "10px",
             }}
           >
-            <Link to={`/challenge/${challenge.challengeId}`}>
-              {challenge.title}
-            </Link>
+            <Link to={`/challenge/${challenge.id}`}>{challenge.title}</Link>
           </li>
         ))}
       </ul>

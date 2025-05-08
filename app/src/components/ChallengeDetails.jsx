@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchData } from "../adapters/handleFetch";
+import { getChallengeId } from "../adapters/challengesFetch";
 
 function ChallengeInfo() {
   const { id } = useParams();
@@ -9,12 +9,13 @@ function ChallengeInfo() {
 
   useEffect(() => {
     const getChallenge = async () => {
-      const [data, error] = await fetchData("/mock-data.json");
+      const [data, error] = await getChallengeId(id);
+
       //  CHECKING
       console.log("hi", data);
 
       if (error) {
-        console.error("error fetching challenges:", error);
+        console.error("error fetching challenge:", error);
         return;
       }
 
