@@ -76,7 +76,7 @@ exports.getAllChallenges = async (req, res) => {
         const challenges = await challenge.list();
         res.status(200).send(challenges);
     } catch (error) {
-        console.error('Error fetching challenges:', error);
+        console.error('Error fetching challenges: ', error);
         res
             .status(500)
             .send({ message: 'An error occurred while fetching challenges.' });
@@ -92,9 +92,24 @@ exports.getChallengeById = async (req, res) => {
         }
         res.status(200).send(challenge);
     } catch (error) {
-        console.error('Error fetching challenge by ID:', error);
+        console.error('Error fetching challenge by ID: ', error);
         res
             .status(500)
             .send({ message: 'An error occurred while fetching the challenge.' });
     }
 }
+
+exports.deleteChallenge = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await Challenge.delete(id);
+        if (!deleted) {
+            return res.status(404).send({ message: 'Challenge not found.' });
+        }
+        res.status(200).send({ message: 'Challenge deleted successfully.' });
+    } catch (error) {
+        console.error('Error deleting challenge: ', error);
+        res.status(500).send({ message: 'An error occurred while deleting challenge.' });
+    }
+};
