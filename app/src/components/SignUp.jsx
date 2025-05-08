@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import FormInput from './FormInput';
-import axios from 'axios'; // Make sure to install axios
 
-const RegisterForm = () => {
+const SignUpForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     dob: '',
     password: '',
     name: '',
-    bio: ''
+    // bio: ''
+    // BIO HIDDEN
   });
 
   const [error, setError] = useState('');
@@ -29,14 +29,25 @@ const RegisterForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post('/api/auth/register', formData, {
-        withCredentials: true // Important for sessions/cookies to work
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        credentials: 'include' // cooooooookieeessss
       });
-      
-      console.log('Registration successful:', response.data);
-      // Redirect or show success message here
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Registration failed');
+      }
+
+      const userData = await response.json();
+      console.log('Sign Up successful! >', userData);
+      // yay or nay
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(err.message || 'Sign up failed :[');
     } finally {
       setIsSubmitting(false);
     }
@@ -44,7 +55,7 @@ const RegisterForm = () => {
 
   return (
     <div className="register-form">
-      <h2>Register</h2>
+      <h2>Sign up</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       
       <form onSubmit={handleSubmit}>
@@ -90,8 +101,8 @@ const RegisterForm = () => {
           onChange={handleChange}
           required
         />
-        
-        <div className="form-group">
+        {/* BIO HIDDEN */}
+        {/* <div className="form-group">
           <label htmlFor="bio">Bio</label>
           <textarea
             id="bio"
@@ -101,7 +112,7 @@ const RegisterForm = () => {
             className="form-control"
             required
           />
-        </div>
+        </div> */}
         
         <button 
           type="submit" 
@@ -115,4 +126,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default SignUpForm;
