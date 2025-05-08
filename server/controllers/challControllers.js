@@ -41,7 +41,33 @@ exports.createChallenge = async (req, res) => {
     } catch (error) {
         console.error('Error creating challenge: ', error)
             .status(500)
-            .send({ message: 'An error occurred while registering the user.' });
+            .send({ message: 'An error occurred while registering the challenge.' });
+    }
+}
+
+exports.updateChallenge = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, description, img, id } = req.body;
+
+        const updateChall = await Challenge.updateChallenge({
+            title,
+            description,
+            img,
+            id
+        });
+
+        if (!updateChall) {
+            return res.status(404).send({ message: 'Challenge not found.' })
+        }
+
+        res
+            .status(200)
+            .send({ message: 'Challenge updated successfully.', challenge: updateChall });
+    } catch (error) {
+        console.error('Error updating challenge: ', error)
+            .status(500)
+            .send({ message: 'An error occurred while updating the challenge.' });
     }
 }
 
