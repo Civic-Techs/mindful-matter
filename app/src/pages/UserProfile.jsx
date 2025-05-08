@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+//import mockData from '../mockData.json';
 
 function UsersProfile() {
-  // const user = users[0];
-  // const hasJoined = joinedChallenges.filter(
+  // const user = mockData.user;
+  // const hasJoined = mockData.challenges.filter(
   //   (entry) => entry.userId === user.userId
   // );
   // const challengeIds = hasJoined.map((entry) => entry.challengeId);
