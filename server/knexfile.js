@@ -3,6 +3,7 @@
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
+require('dotenv').config();
 const path = require('path');
 const migrationsDirectory = path.join(
   __dirname,
