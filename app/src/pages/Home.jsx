@@ -1,9 +1,11 @@
+import './Home.css'
+
 export default function HomePage() {
-    // return <h1>Home Page</h1>;
 
     return (
       <>
-        <h1>MindfulMotion</h1>
-        <a href="/login">Login</a>
+        <h3>Join Today</h3>
+        <a href="/login">Sign Up</a>
+        
       </>
       )}

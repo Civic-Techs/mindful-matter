@@ -10,7 +10,7 @@ class User {
     dob,
     username,
     email,
-    password_hash,
+    password,
     bio,
     profile_img,
     created_at,
@@ -20,7 +20,7 @@ class User {
     this.dob = dob;
     this.email = email;
     this.username = username;
-    this.#passwordHash = password_hash;
+    this.#passwordHash = password;
     this.bio = bio;
     this.profile_img = profile_img;
     this.created_at = created_at;
@@ -119,7 +119,7 @@ class User {
       fields.push(username);
     }
     if (password?.trim()) {
-      updates.push('password_hash = ?');
+      updates.push('password = ?');
       fields.push(await authUtils.hashPassword(password));
     }
 
