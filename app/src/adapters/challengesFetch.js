@@ -4,7 +4,7 @@ const baseUrl = "/api";
 
 export const allChallenges = async () => {
   try {
-    return fetchData(`${baseUrl}/challenges`);
+    return fetchData(`${baseUrl}/challenges/all`);
   } catch (e) {
     console.error("Error Fetching Challenges", e);
     throw new Error(e.message || "an unexpected error occurred");

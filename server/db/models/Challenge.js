@@ -2,6 +2,7 @@ const knex = require("../knex");
 
 class Challenge {
   constructor({
+    id,
     title,
     description,
     img,
@@ -10,6 +11,7 @@ class Challenge {
     end_time,
     user_id,
   }) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.img = img;

@@ -9,30 +9,22 @@ function ChallengeInfo() {
 
   useEffect(() => {
     const getChallenge = async () => {
-      const [data, error] = await getChallengeId(id);
+      try {
+        const [data, error] = await getChallengeId(id);
 
-      //  CHECKING
-      console.log("hi", data);
+        // CHECKING DATA
+        console.log("Challenge Data:", data);
+        // CHECKING DATA
 
-      if (error) {
-        console.error("error fetching challenge:", error);
-        return;
+        if (error) {
+          console.error("Error fetching challenge:", error);
+          return;
+        }
+
+        setChallenge(data);
+      } catch (error) {
+        console.error("Error fetching challenge:", error);
       }
-
-      const foundChallenge = data.challenges.find(
-        (ch) => ch.challengeId === parseInt(id)
-      );
-
-      setChallenge(foundChallenge);
-
-      const joined = data["joined-challenges"].filter(
-        (jc) => jc.challengeId === parseInt(id)
-      );
-
-      const usersJoined = data.user.filter((user) =>
-        joined.some((jc) => jc.userId === user.userId)
-      );
-      setJoinedUsers(usersJoined);
     };
     getChallenge();
   }, [id]);
@@ -40,7 +32,7 @@ function ChallengeInfo() {
   if (!challenge) return <p>Loading Challenge...</p>;
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px" }}>
+    <div key={id} style={{ padding: "20px", maxWidth: "500px" }}>
       <h2>{challenge.title}</h2>
       <p>
         <strong>Description:</strong> {challenge.description}

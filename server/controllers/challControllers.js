@@ -94,14 +94,14 @@ exports.getAllChallenges = async (req, res) => {
   }
 };
 
-const getChallengeById = async (req, res) => {
+exports.getChallengeById = async (req, res) => {
   try {
     const { id } = req.params;
-    const challenge = await challenge.find(id);
-    if (!challenge) {
+    const challengesId = await Challenges.find(id);
+    if (!challengesId) {
       return res.status(404).send({ message: "Challenge not found." });
     }
-    res.status(200).send(challenge);
+    res.status(200).send(challengesId);
   } catch (error) {
     console.error("Error fetching challenge by ID:", error);
     res

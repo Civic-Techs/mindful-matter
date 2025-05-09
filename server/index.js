@@ -68,8 +68,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Mindful Matter API!");
 });
 
-app.get("/challenges", challenges.getAllChallenges);
-app.get("/challenges/:id", challenges.getChallengeById);
+app.get("/api/challenges/all", challenges.getAllChallenges);
+app.get("/api/challenges/:id", challenges.getChallengeById);
 
 app.use(logErrors);
 
