@@ -1,2 +1,21 @@
 import { fetchData } from "./handleFetch";
-import { basicFetchOptions } from "./utils";
+
+const baseUrl = "/api";
+
+export const allChallenges = async () => {
+  try {
+    return fetchData(`${baseUrl}/challenges/all`);
+  } catch (e) {
+    console.error("Error Fetching Challenges", e);
+    throw new Error(e.message || "an unexpected error occurred");
+  }
+};
+
+export const getChallengeId = async (id) => {
+  try {
+    return fetchData(`${baseUrl}/challenges/${id}`);
+  } catch (e) {
+    console.error("Error Fetching by Id", e);
+    throw new Error(e.message || "an unexpected error occurred");
+  }
+};
