@@ -1,5 +1,4 @@
-const challenge = require("../models/challenge");
-const Challenge = require("../models/challenge");
+const Challenges = require("../db/models/Challenge");
 
 exports.createChallenge = async (req, res) => {
   try {
@@ -26,7 +25,7 @@ exports.createChallenge = async (req, res) => {
       });
     }
 
-    const chall = await Challenge.create({
+    const chall = await Challenges.create({
       title,
       description,
       img,
@@ -58,9 +57,9 @@ exports.createChallenge = async (req, res) => {
 exports.updateChallenge = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, img, id } = req.body;
+    const { title, description, img } = req.body;
 
-    const updateChall = await Challenge.updateChallenge({
+    const updateChall = await Challenges.editChallenge({
       title,
       description,
       img,
@@ -71,12 +70,10 @@ exports.updateChallenge = async (req, res) => {
       return res.status(404).send({ message: "Challenge not found." });
     }
 
-    res
-      .status(200)
-      .send({
-        message: "Challenge updated successfully.",
-        challenge: updateChall,
-      });
+    res.status(200).send({
+      message: "Challenge updated successfully.",
+      challenge: updateChall,
+    });
   } catch (error) {
     console
       .error("Error updating challenge: ", error)
@@ -87,8 +84,8 @@ exports.updateChallenge = async (req, res) => {
 
 exports.getAllChallenges = async (req, res) => {
   try {
-    const challenges = await challenge.list();
-    res.status(200).send(challenges);
+    const getChallenges = await Challenges.list();
+    res.status(200).send(getChallenges);
   } catch (error) {
     console.error("Error fetching challenges:", error);
     res
