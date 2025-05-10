@@ -31,6 +31,21 @@ function UsersProfile() {
   //     )}
   //   </>
   // );
+  return (
+    <>
+    <img src="nosrc" title= "pfp placeholder" alt="hover over (broken)image :]" />
+    <div style={{border: '2px solid red'}}>
+    <p>win count</p>
+    <div style={{border: '2px solid black'}}>
+      <p>bio and socials</p>
+    </div>
+    </div>
+
+    <div style={{border: '2px solid black'}}>
+      users joined challenges here?
+    </div>
+    </>
+  )
 }
 
 export default UsersProfile;
