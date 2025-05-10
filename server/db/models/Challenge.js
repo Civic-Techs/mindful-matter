@@ -50,6 +50,7 @@ class Challenge {
   static async list() {
     const query = `SELECT * FROM challenges`;
     const { rows } = await knex.raw(query);
+
     return rows.map((challenge) => new Challenge(challenge));
   }
 

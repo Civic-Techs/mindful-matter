@@ -44,7 +44,7 @@ function ChallengeInfo() {
         <strong>Winner:</strong> {challenge.winner ? "Yes" : "No"}
       </p>
       <p>
-        <strong>Start:</strong> {challenge.timestamp}
+        <strong>Start:</strong> {challenge.created_at}
       </p>
       <p>
         <strong>End:</strong> {challenge.end_time}

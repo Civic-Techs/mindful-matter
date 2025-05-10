@@ -8,9 +8,11 @@ function ChallengesPage() {
   useEffect(() => {
     const getChallenges = async () => {
       const [data, error] = await allChallenges();
+
       // CHECKING DATA
       console.log("Challenges Data:", data);
       // CHECKING DATA
+
       if (error) {
         console.error("error loading challenges", error);
         return;
